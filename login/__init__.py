@@ -18,21 +18,20 @@ db = SQLAlchemy(app)
 def home():
     return render_template('home.html')
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
-    form = LoginForm(request.form)
+    form = LoginForm()
     if form.validate_on_submit():
+        flash('oh yeah baby')
+        print('yes')
         return redirect(url_for('home'))
     return render_template('login.html', form=form)
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['GET','POST'])
 def register():
-    form = RegistrationForm(request.form)
+    form = RegistrationForm()
     print('NOT VALIDATED YET')
     if form.validate_on_submit():
-        flash('Thanks for registering')
-        print('VALIDATED OH')
-        insert_user(form.username.data, form.email.data, form.password.data)
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 

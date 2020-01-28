@@ -10,18 +10,10 @@
 
 {% block content %}
     <form method="POST">
-      {{ form.csrf_token }}
+      {{ form.hidden_tag() }}
       <label>
         <p class="label-txt">{{ form.username.description }}</p>
         {{ form.username(class="input") }}
-
-        {% if form.username.errors %}
-          <div class="invalid-feedback">
-            {% for error in form.username.errors %}
-              <span>{{ error }}</span>
-            {% endfor %}
-          </div>
-        {% endif %}
         <div class="line-box">
           <div class="line"></div>
         </div>
@@ -30,14 +22,6 @@
       <label>
         <p class="label-txt">{{ form.email.description }}</p>
         {{ form.email(class="input") }}
-
-        {% if form.email.errors %}
-          <div class="invalid-feedback">
-            {% for error in form.email.errors %}
-              <span>{{ error }}</span>
-            {% endfor %}
-          </div>
-        {% endif %}
         <div class="line-box">
           <div class="line"></div>
         </div>
@@ -53,7 +37,7 @@
 
       <label>
         <p class="label-txt">{{ form.confirm_password.description }}</p>
-        {{ form.password(class="input") }}
+        {{ form.confirm_password(class="input") }}
         <div class="line-box">
           <div class="line"></div>
         </div>

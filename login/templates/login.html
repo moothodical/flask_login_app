@@ -10,7 +10,7 @@
 
 {% block content %}
     <form method="POST">
-
+      {{ form.hidden_tag() }}
       <label>
         <p class="label-txt">{{ form.username.description }}</p>
         {{ form.username(class="input") }}
