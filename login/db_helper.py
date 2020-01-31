@@ -2,6 +2,7 @@ from login import db
 from login.models import User
 from login import security
 
+
 def insert_user(username, email, password):
     encrypted_password = security.encrypt_password(password)
     user = User(username, email, encrypted_password)
@@ -11,4 +12,3 @@ def insert_user(username, email, password):
 
 def check_exists():
     return
-
