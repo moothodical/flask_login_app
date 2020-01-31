@@ -10,5 +10,5 @@ def insert_user(username, email, password):
     db.session.commit()
 
 
-def check_exists():
-    return
+def check_exists(username):
+    return User.query.filter_by(username=username).first()

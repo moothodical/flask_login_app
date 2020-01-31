@@ -4,6 +4,20 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" href="./static/login.css"/>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    {% with messages = get_flashed_messages() %}
+    	{% for message in messages %}
+    	<div class="alert alert-success">
+    		{{ message }}
+    	</div>
+    		
+    	{% endfor %}
+    {% endwith %}
+
     {% block head %} {% endblock head %}
 
   </head>
