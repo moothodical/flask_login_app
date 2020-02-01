@@ -6,7 +6,7 @@ app = Flask(__name__)
 db = SQLAlchemy(app)
 from flask import render_template, redirect, url_for
 from login.forms import LoginForm, RegistrationForm
-from login.db_helper import insert_user, check_exists
+from login.db_helper import insert_user, check_exists, check_password
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -25,12 +25,16 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         if check_exists(form.username.data):
-            flash(f'You are now logged in as {form.username.data}')
-            return redirect(url_for('home'))
+            if check_password(form.username.data, form.password.data):
+                flash(
+                    f'You are now logged in as {form.username.data}', 'success')
+                return redirect(url_for('home'))
+            else:  # password is incorrect
+                flash(f'Incorrect password. Try again.', 'danger')
+                return redirect(url_for('login'))
         else:
-            flash(f'There is no user by that name.')
+            flash(f'There is no user by that name.', 'danger')
             return redirect(url_for('login'))
-        flash('oh yeah baby')
         return redirect(url_for('home'))
     return render_template('login.html', form=form)
 
@@ -42,8 +46,12 @@ def register():
     if form.validate_on_submit():
         if check_exists(form.username.data):
             flash(
-                f'There is already a user created with the username {form.username.data}')
+                f'There is already a user created with the username {form.username.data}', 'danger')
             return redirect(url_for('register'))
-        flash(f'Account created with username {form.username.data}')
-        return redirect(url_for('login'))
+        else:
+            insert_user(form.username.data,
+                        form.email.data, form.password.data)
+            flash(
+                f'Account created with username {form.username.data}', 'success')
+            return redirect(url_for('login'))
     return render_template('register.html', form=form)
