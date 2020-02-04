@@ -61,13 +61,13 @@ def register():
     form = RegistrationForm()
     print('NOT VALIDATED YET')
     if form.validate_on_submit():
-        if check_exists(form.username.data):
+        if User.check_exists(form.username.data):
             flash(
                 f'There is already a user created with the username {form.username.data}', 'danger')
             return redirect(url_for('register'))
         else:
-            insert_user(form.username.data,
-                        form.email.data, form.password.data)
+            User.insert_user(form.username.data,
+                             form.email.data, form.password.data)
             flash(
                 f'Account created with username {form.username.data}', 'success')
             return redirect(url_for('login'))
