@@ -9,6 +9,15 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <div>
+    	<a href="{{ url_for('home') }}">Home</a>
+    	{% if current_user.is_anonymous %}
+    	<a href="{{ url_for('login') }}">Login</a>
+    	{% else %}
+    	<a href="{{ url_for('logout') }}">Logout</a>
+    	{% endif %}
+    </div>
+
     {% with messages = get_flashed_messages(with_categories=true) %}
     	{% if messages %}
 	    	{% for category, message in messages %}

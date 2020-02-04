@@ -1,0 +1,9 @@
+{{ extends "layout.html" }}
+
+{{ block content }}
+<h1>You cannot access this page!</h1>
+<h2>To access this page, you must be logged in.</h2>
+<h2><a href="{{ url_for('login') }}">Click here to login</h2>
+<h2>Need an account? <a href="{{ url_for('register') }}">Register</h2>
+
+{{ endblock content }}
