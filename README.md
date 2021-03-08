@@ -4,6 +4,7 @@ but also database ORM, templating engines, etc.
 
 # Frameworks/modules used for this project
 - Flask
+- Bootstrap
 - Jinja2 templating engine
 - SQLAlchemy
 - werkzeug for password hashing
